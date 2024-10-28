@@ -22,7 +22,17 @@ O Projeto é uma API desenvolvida em Node.js que permite o gerenciamento de estu
    ```bash
    git clone https://github.com/rafaelDev99/focavest-backend.git
 
-2. Clone o repositório:
+2. Navegue até o diretório do projeto:
 
    ```bash
    cd focavest-backend
+
+3. Instale as dependências do projeto:
+
+   ```bash
+   npm install
+
+4. Inicie o servidor:
+
+   ```bash
+   node server.js
