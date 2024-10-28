@@ -13,7 +13,7 @@ Um sistema backend em Node.js para gerenciar um cronograma de estudos focado no 
 
 ## Descrição
 
-O **Projeto Agenda Vestibular** é uma API desenvolvida em Node.js que permite o gerenciamento e consulta de uma agenda semanal para estudos de vestibular. Com dados pré-definidos em JSON, ele permite acessar o cronograma de atividades diárias com informações detalhadas, como matérias, tópicos, prioridade e tempo estimado para cada tarefa.
+O Projeto é uma API desenvolvida em Node.js que permite o gerenciamento de estudos para vestibular.
 
 ## Instalação
 
