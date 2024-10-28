@@ -1,0 +1,122 @@
+[
+    {
+      "date": "2023-10-30",
+      "tasks": [
+        {
+          "subject": "Matemática",
+          "topic": "Funções e gráficos",
+          "priority": "alta",
+          "time": "9:00 AM",
+          "estimatedDuration": "2 horas"
+        },
+        {
+          "subject": "Redação",
+          "topic": "Prática de dissertação sobre temas sociais",
+          "priority": "alta",
+          "time": "2:00 PM",
+          "estimatedDuration": "1 hora e 30 minutos"
+        }
+      ]
+    },
+    {
+      "date": "2023-10-31",
+      "tasks": [
+        {
+          "subject": "Física",
+          "topic": "Mecânica: Leis de Newton",
+          "priority": "alta",
+          "time": "9:00 AM",
+          "estimatedDuration": "2 horas"
+        },
+        {
+          "subject": "Biologia",
+          "topic": "Ecologia: Cadeias alimentares",
+          "priority": "média",
+          "time": "1:00 PM",
+          "estimatedDuration": "1 hora"
+        }
+      ]
+    },
+    {
+      "date": "2023-11-01",
+      "tasks": [
+        {
+          "subject": "Química",
+          "topic": "Ligação química",
+          "priority": "alta",
+          "time": "10:00 AM",
+          "estimatedDuration": "2 horas"
+        },
+        {
+          "subject": "História",
+          "topic": "Brasil Colonial",
+          "priority": "média",
+          "time": "3:00 PM",
+          "estimatedDuration": "1 hora e 30 minutos"
+        }
+      ]
+    },
+    {
+      "date": "2023-11-02",
+      "tasks": [
+        {
+          "subject": "Geografia",
+          "topic": "Clima e vegetação",
+          "priority": "alta",
+          "time": "9:00 AM",
+          "estimatedDuration": "2 horas"
+        },
+        {
+          "subject": "Literatura",
+          "topic": "Modernismo no Brasil",
+          "priority": "média",
+          "time": "2:00 PM",
+          "estimatedDuration": "1 hora e 30 minutos"
+        }
+      ]
+    },
+    {
+      "date": "2023-11-03",
+      "tasks": [
+        {
+          "subject": "Filosofia",
+          "topic": "Introdução à ética",
+          "priority": "média",
+          "time": "10:00 AM",
+          "estimatedDuration": "1 hora"
+        },
+        {
+          "subject": "Simulado",
+          "topic": "Prova completa de simulação de vestibular",
+          "priority": "alta",
+          "time": "2:00 PM",
+          "estimatedDuration": "4 horas"
+        }
+      ]
+    },
+    {
+      "date": "2023-11-04",
+      "tasks": [
+        {
+          "subject": "Revisão Geral",
+          "topic": "Revisão de Matemática e Física",
+          "priority": "alta",
+          "time": "9:00 AM",
+          "estimatedDuration": "3 horas"
+        }
+      ]
+    },
+    {
+      "date": "2023-11-05",
+      "tasks": [
+        {
+          "subject": "Descanso e Reflexão",
+          "topic": "Revisão de estratégias de estudo e recuperação",
+          "priority": "baixa",
+          "time": "10:00 AM",
+          "estimatedDuration": "1 hora"
+        }
+      ]
+    }
+  ]
+  
