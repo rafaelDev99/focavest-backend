@@ -21,3 +21,8 @@ O Projeto é uma API desenvolvida em Node.js que permite o gerenciamento de estu
 
    ```bash
    git clone https://github.com/rafaelDev99/focavest-backend.git
+
+2. Clone o repositório:
+
+   ```bash
+   cd focavest-backend
