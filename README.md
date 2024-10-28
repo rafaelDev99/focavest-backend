@@ -1,6 +1,6 @@
-# Projeto Agenda Vestibular
+# Projeto FocaVest
 
-Um sistema backend em Node.js para gerenciar um cronograma de estudos focado no vestibular no Brasil. Este projeto fornece uma API para acessar tarefas diárias de estudo, ajudando estudantes a organizar seu cronograma de forma eficiente.
+Um sistema backend em Node.js para gerenciar um cronograma de estudos e tarefas focado no vestibular no Brasil. Este projeto fornece uma API para acessar tarefas diárias de estudo, ajudando estudantes a organizar seu cronograma de forma eficiente.
 
 ## Índice
 
