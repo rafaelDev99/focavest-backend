@@ -53,4 +53,48 @@ const getAgendaByDate = (req, res) => {
   }
 };
 
-module.exports = { getAllAgendas, getAgendaByDate, addAgenda };
+
+const addTask = (req, res) => {
+  try {
+
+    console.log("start req")
+    const { date } = req.params; // Data da agenda enviada na URL
+    const newTask = req.body; // Dados da nova tarefa enviados no corpo da requisição
+
+    console.log("date req: "+date)
+    console.log("date body: " )
+    console.log(req.body)
+
+    // Valida se todos os campos obrigatórios da tarefa estão presentes
+    const requiredFields = ['subject', 'topic', 'priority', 'time', 'estimatedDuration'];
+    const missingFields = requiredFields.filter(field => !(field in newTask));
+    if (missingFields.length > 0) {
+      return res.status(400).json({ message: `Missing required fields: ${missingFields.join(', ')}` });
+    }
+
+    // Lê os dados existentes do arquivo JSON
+    const data = getAgendaData();
+
+    // Busca a agenda pelo campo "date"
+    const agenda = data.find(item => item.date === date);
+
+    if (!agenda) {
+      return res.status(404).json({ message: 'Agenda not found for the specified date' });
+    }
+
+    // Adiciona a nova tarefa na agenda
+    agenda.tasks.push(newTask);
+
+    // Escreve os dados atualizados no arquivo JSON
+    fs.writeFileSync(agendaFilePath, JSON.stringify(data, null, 2), 'utf8');
+
+    console.log()
+    console.log("End req ")
+    res.status(201).json({ message: 'Task added successfully', agenda });
+  } catch (error) {
+    res.status(500).json({ message: 'Error adding task', error });
+  }
+};
+
+
+module.exports = { getAllAgendas, getAgendaByDate, addAgenda, addTask };
