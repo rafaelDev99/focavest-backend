@@ -8,12 +8,34 @@ const getAgendaData = () => {
   return JSON.parse(data);
 };
 
+const writeAgendaData = (data) => {
+  fs.writeFileSync(agendaFilePath, JSON.stringify(data, null, 2), 'utf8');
+};
+
 const getAllAgendas = (req, res) => {
   try {
     const data = getAgendaData();
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ message: 'Error retrieving agendas' });
+  }
+};
+
+const addAgenda = (req, res) => {
+  try {
+    const data = getAgendaData();
+    const newAgenda = req.body;
+
+    if (!newAgenda.date || !newAgenda.tasks) {
+      return res.status(400).json({ message: 'The fields "date" and "tasks" are required.' });
+    }
+
+    data.push(newAgenda);
+    writeAgendaData(data);
+
+    res.status(201).json({ message: 'Agenda added successfully!', agenda: newAgenda });
+  } catch (error) {
+    res.status(500).json({ message: 'Error adding new agenda' });
   }
 };
 
@@ -31,4 +53,4 @@ const getAgendaByDate = (req, res) => {
   }
 };
 
-module.exports = { getAllAgendas, getAgendaByDate };
+module.exports = { getAllAgendas, getAgendaByDate, addAgenda };

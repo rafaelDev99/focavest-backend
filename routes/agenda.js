@@ -6,4 +6,6 @@ router.get('/agendas', agendaController.getAllAgendas);
 
 router.get('/agendas/:date', agendaController.getAgendaByDate);
 
+router.post('/agendas',agendaController.addAgenda);
+
 module.exports = router;
