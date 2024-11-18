@@ -8,8 +8,13 @@ const getAgendaData = () => {
   return JSON.parse(data);
 };
 
-const writeAgendaData = (data) => {
-  fs.writeFileSync(agendaFilePath, JSON.stringify(data, null, 2), 'utf8');
+const getCurrentDate = () => {
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Adiciona 1 ao mês (0-11) e formata com 2 dígitos
+  const day = currentDate.getDate().toString().padStart(2, '0'); // Formata o dia com 2 dígitos
+
+  return `${year}-${month}-${day}`;
 };
 
 const getAllAgendas = (req, res) => {
@@ -18,24 +23,6 @@ const getAllAgendas = (req, res) => {
     res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ message: 'Error retrieving agendas' });
-  }
-};
-
-const addAgenda = (req, res) => {
-  try {
-    const data = getAgendaData();
-    const newAgenda = req.body;
-
-    if (!newAgenda.date || !newAgenda.tasks) {
-      return res.status(400).json({ message: 'The fields "date" and "tasks" are required.' });
-    }
-
-    data.push(newAgenda);
-    writeAgendaData(data);
-
-    res.status(201).json({ message: 'Agenda added successfully!', agenda: newAgenda });
-  } catch (error) {
-    res.status(500).json({ message: 'Error adding new agenda' });
   }
 };
 
@@ -60,10 +47,15 @@ const addTask = (req, res) => {
     console.log("start req")
     const { date } = req.params; // Data da agenda enviada na URL
     const newTask = req.body; // Dados da nova tarefa enviados no corpo da requisição
+    const currentDate = getCurrentDate();
 
     console.log("date req: "+date)
     console.log("date body: " )
     console.log(req.body)
+
+    if(date < currentDate){
+      return res.status(400).json({ message: 'You cannot create tasks for past dates.' });
+    }
 
     // Valida se todos os campos obrigatórios da tarefa estão presentes
     const requiredFields = ['subject', 'topic', 'priority', 'time', 'estimatedDuration'];
@@ -76,10 +68,24 @@ const addTask = (req, res) => {
     const data = getAgendaData();
 
     // Busca a agenda pelo campo "date"
-    const agenda = data.find(item => item.date === date);
+    let agenda = data.find(item => item.date === date);
 
     if (!agenda) {
-      return res.status(404).json({ message: 'Agenda not found for the specified date' });
+      console.log("current date: "+currentDate)
+      console.log("req date: "+date)
+
+      agenda = {
+        date: date,
+        tasks: []
+      }
+
+      // Adiciona a nova tarefa na agenda
+      agenda.tasks.push(newTask);
+
+      data.push(agenda);
+      fs.writeFileSync(agendaFilePath, JSON.stringify(data, null, 2), 'utf8');
+
+      return res.status(201).json({ message: 'Task added successfully', agenda });
     }
 
     // Adiciona a nova tarefa na agenda
@@ -97,4 +103,4 @@ const addTask = (req, res) => {
 };
 
 
-module.exports = { getAllAgendas, getAgendaByDate, addAgenda, addTask };
+module.exports = { getAllAgendas, getAgendaByDate, addTask };
