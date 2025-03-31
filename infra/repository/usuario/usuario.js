@@ -4,7 +4,7 @@ class UsuarioRepository{
     async getAllUsuario() {
         const users = await sql`
           select id, nome, email, tipo_usuario
-          from ususario
+          from usuario
         `
         return users
     }
