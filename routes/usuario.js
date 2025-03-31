@@ -15,12 +15,16 @@ const router = express.Router();
  * @swagger
  * /api/usuarios:
  *   get:
- *     summary: Retorna todos os memebros com filtros opcionais
- *     tags: [Members]
+ *     summary: Retorna todos os usuarios
+ *     tags: [Usuarios]
+ *   responses:
+ *       200:
+ *         description: List of all usuarios
  */
+
 router.get('/', async (req, res) => {
-    const usuarios = await usuarioController.getAllUsuario();
-    res.json(members);
+    const data = await usuarioController.getAllUsuario();
+    return res.json(data);
 });
 
 
