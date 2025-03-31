@@ -1,17 +1,23 @@
 const express = require('express');
 const cors = require('cors');
 
-// server.js
-const app = express();
-app.use(cors());
-
+const { specs, swaggerUi } = require('./config/swagger');
 const agendaRoutes = require('./routes/agenda');
+const usuarioRoutes = require('./routes/usuario')
+const alunosRoutes = require('./routes/aluno')
 
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
+// server.js
+const app = express();
 
-app.use('/api', agendaRoutes);
+app.use(cors());
+app.use(express.json());
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(specs));
+
+app.use('/api/agendas',agendaRoutes);
+app.use('/api/usuarios',usuarioRoutes);
+app.use('/api/alunos',alunosRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
