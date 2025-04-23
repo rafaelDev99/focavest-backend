@@ -16,12 +16,11 @@ const router = express.Router();
  * /api/alunos:
  *   get:
  *     summary: Retorna todos os alunos
- *     tags: [alunos]
- *   responses:
+ *     tags: [Alunos]
+ *     responses:
  *       200:
  *         description: List of all alunos
  */
-
 router.get('/', async (req, res) => {
     const data = await alunoController.getAllAluno();
     return res.json(data);

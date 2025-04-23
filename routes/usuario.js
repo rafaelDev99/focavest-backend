@@ -21,7 +21,6 @@ const router = express.Router();
  *       200:
  *         description: List of all usuarios
  */
-
 router.get('/', async (req, res) => {
     const data = await usuarioController.getAllUsuario();
     return res.json(data);

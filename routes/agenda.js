@@ -12,7 +12,6 @@ const agendaController = require('../controllers/agendaController');
  *       200:
  *         description: List of all agendas
  */
-
 router.get('/agendas', agendaController.getAllAgendas);
 
 

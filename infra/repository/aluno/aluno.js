@@ -1,4 +1,5 @@
-const sql = require('../../../config/db')
+const sql = require('../../../config/db');
+const Usuario = require('../../../entities/usuario');
 
 class AlunoRepository{
     async getAllAluno() {

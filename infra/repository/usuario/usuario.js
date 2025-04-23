@@ -8,6 +8,9 @@ class UsuarioRepository{
         `
         return users
     }
+    async getUsuarioByEmail(){
+      
+    }
 }
 
 module.exports = new UsuarioRepository();
