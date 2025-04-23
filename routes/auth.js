@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const alunoController = require('../controllers/authController');
+const authController = require('../controllers/authController');
 
 /**
  * @swagger
@@ -10,7 +12,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/tasks:
+ * /api/auth/register:
  *   post:
  *     summary: Cria um novo usuario
  *     tags: [Auth]
@@ -21,24 +23,28 @@ const router = express.Router();
  *           schema:
  *             type: object
  *             properties:
- *               titulo:
+ *               nome:
  *                 type: string
- *               status:
+ *               email:
  *                 type: string
- *               cursoId:
- *                 type: integer
+ *               senha:
+ *                 type: string
  *     responses:
  *       201:
- *         description: Tarefa criada com sucesso
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/TarefaDto'
+ *         description: Usuario criada com sucesso
  */
-router.post('/register', (req, res) => {
-    const { titulo, status, cursoId } = req.body;
-    const newTask = taskService.createTask(titulo, status, cursoId);
-    res.status(201).json(newTask);
+router.post('/register', async (req, res) => {
+    const result = await authController.register(req.body)
+    if(result.error){
+        return res.status(400).json({
+            'message': result.message
+        })
+    }
+
+    return res.status(201).json({
+        'body': result.body,
+        'message': result.message
+    });
 });
 
 module.exports = router;
