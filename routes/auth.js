@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const alunoController = require('../controllers/authController');
 const authController = require('../controllers/authController');
 
 /**
@@ -37,13 +36,15 @@ router.post('/register', async (req, res) => {
     const result = await authController.register(req.body)
     if(result.error){
         return res.status(400).json({
+            'status': 'Failure',
             'message': result.message
         })
     }
 
     return res.status(201).json({
-        'body': result.body,
-        'message': result.message
+        'status': 'Ok',
+        'message': result.message,
+        'body': result.body
     });
 });
 

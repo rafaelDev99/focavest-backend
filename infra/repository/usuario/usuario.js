@@ -34,6 +34,14 @@ class UsuarioRepository{
       `;
       return result[0];
     }
+    async verifyUsuarioByEmail(email){
+      const result = await sql`
+        SELECT id, email, password_hash 
+        FROM usuario 
+        WHERE email = ${email}
+      `;
+      return result[0];
+    }
 }
 
 module.exports = new UsuarioRepository();
