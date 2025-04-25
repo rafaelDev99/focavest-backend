@@ -6,7 +6,7 @@ const authController = require('../controllers/authController');
  * @swagger
  * tags:
  *   name: Auth
- *   description: 
+ *   description:
  */
 
 /**
@@ -63,7 +63,7 @@ router.post('/register', async (req, res) => {
  *             properties:
  *               email:
  *                  type: string
- *               password:
+ *               senha:
  *                 type: string
  *     responses:
  *       201:

@@ -18,8 +18,7 @@ app.use(express.json());
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use('/api/agendas',authenticateToken,agendaRoutes);
-app.use('/api/usuarios',usuarioRoutes);
-app.use('/api/alunos',alunosRoutes);
+app.use('/api/alunos', authenticateToken,alunosRoutes);
 app.use('/api/auth',authRoutes)
 
 app.listen(PORT, () => {

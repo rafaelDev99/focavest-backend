@@ -18,6 +18,7 @@ class AuthController {
                     'body': null
                 }
             }
+            
             const password_verification = await bcrypt.compare(loginUsuarioDto.senha, usuario.password_hash)
             if(!password_verification){
                 return {

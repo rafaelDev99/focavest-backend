@@ -4,7 +4,6 @@ const usuarioController = require('../controllers/usuarioController')
 const router = express.Router();
 
 /**
- * @swagger
  * tags:
  *   name: Usuarios
  *   description: Gerenciamento de usuarios
@@ -12,7 +11,6 @@ const router = express.Router();
 
 
 /**
- * @swagger
  * /api/usuarios:
  *   get:
  *     summary: Retorna todos os usuarios
