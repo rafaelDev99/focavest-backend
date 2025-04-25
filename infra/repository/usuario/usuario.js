@@ -36,7 +36,7 @@ class UsuarioRepository{
     }
     async verifyUsuarioByEmail(email){
       const result = await sql`
-        SELECT id, email, password_hash 
+        SELECT id, nome, email, tipo_usuario, password_hash 
         FROM usuario 
         WHERE email = ${email}
       `;

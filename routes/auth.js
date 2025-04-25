@@ -48,4 +48,41 @@ router.post('/register', async (req, res) => {
     });
 });
 
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     summary: Faz o login do usuario
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                  type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Token gerado
+ */
+router.post('/login', async (req, res) => {
+    const result = await authController.login(req.body)
+    if(result.error){
+        return res.status(400).json({
+            'status': 'Failure',
+            'message': result.message
+        })
+    }
+
+    return res.status(201).json({
+        'status': 'Ok',
+        'message': result.message,
+        'body': result.body
+    });
+});
+
 module.exports = router;

@@ -7,7 +7,6 @@ const JWTSECRET = "asda31231-adas123125-nfansn124"
 const { v4: uuidv4 } = require('uuid');
 
 class AuthController {
-
     async login(body){
         try{
             const loginUsuarioDto = body;
@@ -27,7 +26,26 @@ class AuthController {
                     'body': null
                 }
             }
-            const token = jwt.sign({ id: usuario.id }, JWTSECRET)
+
+            const usuarioDto = {
+                'id': usuario.id,
+                'nome': usuario.nome,
+                'email': usuario.email,
+                'tipo': usuario.tipo_usuario
+            }
+            const token = jwt.sign({
+                user: JSON.stringify(usuarioDto)
+            }, JWTSECRET)
+
+            const bodyResponse = {
+                token: token
+            };
+
+            return ({
+                'error': false,
+                'message': 'Token generated Successfuly!',
+                'body': bodyResponse
+            })
         }catch(err){
             return ({
                 'error': true,
@@ -37,7 +55,6 @@ class AuthController {
         }
     }
 
-    
     async register(body){
         try{
             const createUsuarioDto = createUsuarioDto_data(body);
