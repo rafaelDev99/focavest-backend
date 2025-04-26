@@ -67,19 +67,17 @@ class AuthController {
                     'body': null
                 }
             }else{
-                const id = uuidv4();
                 const created_at = new Date();
                 const salt = await bcrypt.genSalt(10)
                 const hashedPassword = await bcrypt.hash(createUsuarioDto.senha, salt)
 
-                const usuario = new Usuario(
-                    id,
-                    createUsuarioDto.nome,
-                    createUsuarioDto.email,
-                    hashedPassword,
-                    'aluno',
-                    created_at
-                );
+                const usuario = {
+                    nome: createUsuarioDto.nome,
+                    email: createUsuarioDto.email,
+                    password_hash: hashedPassword,
+                    tipo_usuario: 'aluno',
+                    criado_em: created_at
+                }   
 
                 const result = await usuarioRepository.createUsuario(usuario)
                 return {

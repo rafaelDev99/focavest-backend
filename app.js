@@ -10,7 +10,7 @@ const { authenticateToken } = require('./middlewares/security');
 
 const PORT = process.env.PORT || 3000;
 
-// server.js
+// server
 const app = express();
 
 app.use(cors());
@@ -18,7 +18,7 @@ app.use(express.json());
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use('/api/agendas',authenticateToken,agendaRoutes);
-app.use('/api/alunos', authenticateToken,alunosRoutes);
+app.use('/api/usuarios',authenticateToken, usuarioRoutes);
 app.use('/api/auth',authRoutes)
 
 app.listen(PORT, () => {

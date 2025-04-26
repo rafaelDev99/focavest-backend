@@ -3,7 +3,6 @@ const sql = require('../../../config/db')
 class UsuarioRepository{
     async createUsuario(usuario){
       const {
-        id,
         nome,
         email,
         tipo_usuario,
@@ -12,8 +11,8 @@ class UsuarioRepository{
       } = usuario;
 
       const result = await sql`
-        INSERT INTO usuario (id, nome, email, tipo_usuario, criado_em, password_hash)
-        VALUES (${id}, ${nome}, ${email}, ${tipo_usuario}, ${criado_em}, ${password_hash})
+        INSERT INTO usuario (nome, email, tipo_usuario, criado_em, password_hash)
+        VALUES (${nome}, ${email}, ${tipo_usuario}, ${criado_em}, ${password_hash})
         RETURNING id, nome, email
       `;
 
@@ -28,9 +27,17 @@ class UsuarioRepository{
     }
     async getUsuarioByEmail(email){
       const result = await sql`
-        SELECT id, nome, email, tipo_usuario 
+        SELECT id, nome, email, tipo_usuario, idade, cidade, cursos_desejados, image_url
         FROM usuario 
         WHERE email = ${email}
+      `;
+      return result[0];
+    }
+    async getUsuarioById(id){
+      const result = await sql`
+        SELECT id, nome, email, tipo_usuario, idade, cidade, cursos_desejados, image_url
+        FROM usuario 
+        WHERE id = ${id}
       `;
       return result[0];
     }

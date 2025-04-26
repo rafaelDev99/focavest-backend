@@ -4,7 +4,6 @@ const alunoController = require('../controllers/alunoController')
 const router = express.Router();
 
 /**
- * @swagger
  * tags:
  *   name: Alunos
  *   description: Gerenciamento de alunos
@@ -12,7 +11,6 @@ const router = express.Router();
 
 
 /**
- * @swagger
  * /api/alunos:
  *   get:
  *     summary: Retorna todos os alunos
