@@ -9,6 +9,20 @@ const options = {
         version: '1.0.0',
         description: 'Focavest API with Swagger documentation',
       },
+      components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT',
+          },
+        },
+      },
+      security: [
+        {
+          bearerAuth: [],
+        },
+      ],
     },
     apis: ['./routes/*.js'],
 };

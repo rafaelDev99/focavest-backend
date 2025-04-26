@@ -1,29 +1,18 @@
-//  EXEMPLO DE ENTIDADE
-
 class Usuario {
     constructor(
-        userId, 
-        nomeCompleto, 
+        id, 
+        nome, 
         email, 
-        hashSenha, 
-        telefone, 
-        role, 
-        area, 
-        horario,
-        cursos,
-        tarefas,
-        documentos) {
-        this.userId = userId;
-        this.nomeCompleto = nomeCompleto;
+        password_hash,  
+        tipo_usuario,
+        criado_em,
+    ) {
+        this.id = id;
+        this.nome = nome;
         this.email = email;
-        this.hashSenha = hashSenha;
-        this.telefone = telefone;
-        this.role = role;
-        this.area = area;
-        this.horario = horario;
-        this.tarefas = tarefas;
-        this.documentos = documentos;
-        this.cursos = cursos;
+        this.password_hash = password_hash;
+        this.tipo_usuario = tipo_usuario;
+        this.criado_em = criado_em
     }
 }
 
