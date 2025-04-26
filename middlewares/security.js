@@ -6,7 +6,7 @@ function verifyAccessToken(token){
         const decode = jwt.verify(token, JWTSECRET);
         return {success: true, data: decode};
     }catch(err){
-        return {success: false, error: e.message};
+        return {success: false, error: err.message};
     }
 }
 
