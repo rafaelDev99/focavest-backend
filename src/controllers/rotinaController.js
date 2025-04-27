@@ -5,36 +5,53 @@ class RotinaController {
         return await rotinaRepository.getRotinaById(id);
     }
     async getRotinasByUsuario(usuarioId){
-        const result = await rotinaRepository.getRotinasByUsuario(usuarioId);
+        try{
+            const result = await rotinaRepository.getRotinasByUsuario(usuarioId);
 
-        const rotinasDto = result.reduce((acc, row) => {
-            let rotina = acc.find(r => r.rotina_id === row.rotina_id);
-            if(!rotina){
-                rotina = {
-                    id: row.rotina_id,
-                    nome: row.rotina_nome,
-                    descricao: row.rotina_descricao,
-                    materia: row.rotina_materia,
-                    topico: row.rotina_topico,
-                    data: row.rotina_data,
-                    atividades: []
+            const rotinasDto = result.reduce((acc, row) => {
+                let rotina = acc.find(r => r.rotina_id === row.rotina_id);
+
+
+                if(!rotina){
+                    rotina = {
+                        id: row.rotina_id,
+                        nome: row.rotina_nome,
+                        descricao: row.rotina_descricao,
+                        materia: row.rotina_materia,
+                        topico: row.rotina_topico,
+                        data: row.rotina_data,
+                        atividades: []
+                    }
+                    acc.push(rotina);
                 }
-                acc.push(rotina);
+
+                rotina.atividades.push({
+                    id: row.atividade_id,
+                    titulo: row.atividade_titulo,
+                    cor: row.atividade_cor,
+                    descricao: row.atividade_descricao,
+                    dataInicio: row.atividade_data_inicio,
+                    dataFim: row.atividade_data_fim,
+                    duracao: row.atividade_duracao,
+                    check_task: row.atividade_check_task
+                });
+
+                return acc;
+            }, []);
+
+            return {
+                error: false,
+                message: "Rotinas buscadas com sucesso!",
+                body: rotinasDto
             }
-
-            rotina.atividades.push({
-                id: row.atividade_id,
-                titulo: row.atividade_titulo,
-                cor: row.atividade_cor,
-                descricao: row.atividade.descricao,
-                dataInicio: row.atividade_data_inicio,
-                dataFim: row.atividade_data_fim,
-                duracao: row.atividade_duracao,
-                check_task: row.atividade_check_task
-            });
-        }, []);
-
-        return rotinasDto;
+        }catch(err){
+            return {
+                error: true,
+                message: err.message,
+                body: null
+            }
+        }
+        
     }
     async createRotina(body){
         const createRotinaDto = body;
