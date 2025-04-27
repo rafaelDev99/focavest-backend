@@ -1,9 +1,9 @@
 const alunoRepository = require('../infra/repository/aluno/aluno')
 
-class AlunoControlller {
+class AlunoController {
     async getAllAluno(){
         return await alunoRepository.getAllAluno();
     }
 }
 
-module.exports = new AlunoControlller();
+module.exports = new AlunoController();

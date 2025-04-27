@@ -1,6 +1,6 @@
 const usuarioRepository = require('../infra/repository/usuario/usuario')
 
-class UsuarioControlller {
+class UsuarioController {
     async getUsuarioById(id){
         return await usuarioRepository.getUsuarioById(id);
     }
@@ -12,4 +12,4 @@ class UsuarioControlller {
     }
 }
 
-module.exports = new UsuarioControlller();
+module.exports = new UsuarioController();
