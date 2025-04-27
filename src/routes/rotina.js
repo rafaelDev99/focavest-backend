@@ -67,7 +67,6 @@ router.get('/progresso/:usuarioId', async (req, res) => {
             'message': result.message
         })
     }
-    console.log(result)
     return res.json(result.body);
 });
 
