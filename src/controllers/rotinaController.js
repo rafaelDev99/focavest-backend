@@ -74,13 +74,25 @@ class RotinaController {
         endOfWeek.setDate(startOfWeek.getDate() + 6);
 
         const getProgressReq = {
-            user_id: id,
+            user_id: usuarioId,
             start_of_week: startOfWeek,
             end_of_week: endOfWeek
         }
 
-        const result = rotinaRepository.getProgressoByWeekAndUsuairio(getProgressReq);
-        return result;
+        try{
+            const result = await rotinaRepository.getProgressoByWeekAndUsuairio(getProgressReq);
+            return {
+                error: false,
+                message: "progresso retornado com sucesso",
+                body: result
+            }
+        }catch(err){
+            return {
+                error: true,
+                message: err.message,
+                body: null
+            }
+        }
     }
 }
 

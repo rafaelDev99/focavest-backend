@@ -41,5 +41,34 @@ router.get('/:usuarioId', async (req, res) => {
     return res.json(result.body);
 });
 
+/**
+ * @swagger
+ * /api/rotinas/progresso/{usuarioId}:
+ *   get:
+ *     summary: Retorna progresso semanal pelo id do usuario
+ *     tags: [Rotinas]
+ *     parameters:
+ *        - in: path
+ *          name: usuarioId
+ *          schema:
+ *             type: string
+ *          required: true
+ *          description: ID do usuario
+ *     responses:
+ *       200:
+ *         description: progresso
+ */
+router.get('/progresso/:usuarioId', async (req, res) => {
+    const id = req.params.usuarioId;
+    const result = await rotinaController.getProgressoByWeekAndUsuarioId(id)
+    if(result.error){
+        return res.status(400).json({
+            'status': 'Failure',
+            'message': result.message
+        })
+    }
+    console.log(result)
+    return res.json(result.body);
+});
 
 module.exports = router;
