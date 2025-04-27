@@ -71,5 +71,55 @@ router.get('/:rotinaId', async (req, res) => {
     return res.json(data);
 });
 
+/**
+ * @swagger
+ * /api/atividades:
+ *   post:
+ *     summary: Cria uma nova atividade
+ *     tags: [Atividades]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               rotina_id:
+ *                 type: string
+ *               cor:
+ *                 type: string
+ *               descricao:
+ *                 type: string
+ *               data_inicio:
+ *                 type: string
+ *                 format: date-time
+ *                 example: "2025-04-27T14:00:00Z"
+ *               data_fim:
+ *                 type: string
+ *                 format: date-time
+ *                 example: "2025-04-27T14:00:00Z"
+ *               duracao:
+ *                 type: integer
+ *                 format: int32
+ *     responses:
+ *       201:
+ *         description: Atividade criada com sucesso
+ */
+router.post('/', async (req, res) => {
+    const result = await atividadeController.create(req.body)
+    if(result.error){
+        return res.status(400).json({
+            'status': 'Failure',
+            'message': result.message
+        })
+    }
+
+    return res.status(201).json({
+        'status': 'Ok',
+        'message': result.message,
+        'body': result.body
+    });
+});
+
 
 module.exports = router;
