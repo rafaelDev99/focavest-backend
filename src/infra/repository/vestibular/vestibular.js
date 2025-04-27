@@ -17,14 +17,14 @@ class VestibularRepository{
         RETURNING id, data, pfp, uni, curso, site, criado_em
       `;
 
-      return result[0];
+      return result[0] || {};
     }
     async getAllVestibulares() {
-        const vestibulares = await sql`
+        const result = await sql`
           select id, data, pfp, uni, curso, site, criado_em
           from vestibular
         `
-        return vestibulares
+        return result || [];
     }
     async getVestibularById(id){
       const result = await sql`
@@ -32,7 +32,7 @@ class VestibularRepository{
         FROM vestibular 
         WHERE id = ${id}
       `;
-      return result[0];
+      return result[0] || {};
     }
     async updateVestibular(id, fieldsToUpdate) {
       if (!id) {
@@ -53,7 +53,7 @@ class VestibularRepository{
         [...values, id]
       );
     
-      return result[0];
+      return result[0] || {};
     }    
     async deleteVestibular(id) {
       if (!id) {
@@ -66,8 +66,8 @@ class VestibularRepository{
           RETURNING id
       `;
   
-      return result[0];
-  }  
+      return result[0] || {};
+    }  
 }
 
 module.exports = new VestibularRepository();

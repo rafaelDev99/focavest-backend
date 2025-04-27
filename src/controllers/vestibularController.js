@@ -4,10 +4,22 @@ const vestibularRepository = require('../infra/repository/vestibular/vestibular'
 
 class VestibularController {
     async getVestibularById(id){
-        return await vestibularRepository.getVestibularById(id);
+        try {
+            const data = await vestibularRepository.getVestibularById(id);
+            return data;
+        } catch (error) {
+            console.error('Erro ao buscar vestibular:', error);
+            throw new Error('Não foi possível buscar o vestibular.');
+        }
     }
     async getAllVestibulares(){
-        return await vestibularRepository.getAllVestibulares();
+        try {
+            const data = await vestibularRepository.getAllVestibulares();
+            return data;
+        } catch (error) {
+            console.error('Erro ao buscar vestibulares:', error);
+            throw new Error('Não foi possível buscar os vestibulares.');
+        }
     }
     async create(body){
         try {
