@@ -28,6 +28,16 @@ const authController = require('../controllers/authController');
  *                 type: string
  *               senha:
  *                 type: string
+ *               idade:
+ *                 type: integer 
+ *               cidade:
+ *                 type: string     
+ *               image_url:
+ *                 type: string
+ *               cursos_desejados:
+ *                 type: array
+ *                 items:
+ *                     type: string
  *     responses:
  *       201:
  *         description: Usuario criada com sucesso

@@ -77,7 +77,11 @@ class AuthController {
                     email: createUsuarioDto.email,
                     password_hash: hashedPassword,
                     tipo_usuario: 'aluno',
-                    criado_em: created_at
+                    criado_em: created_at,
+                    idade: createUsuarioDto.idade,
+                    cidade: createUsuarioDto.cidade,
+                    image_url: createUsuarioDto.image_url,
+                    cursos_desejados: createUsuarioDto.cursos_desejados
                 }   
 
                 const result = await usuarioRepository.createUsuario(usuario)

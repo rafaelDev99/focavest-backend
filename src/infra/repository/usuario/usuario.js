@@ -7,20 +7,24 @@ class UsuarioRepository{
         email,
         tipo_usuario,
         criado_em,
-        password_hash
+        password_hash,
+        idade,
+        cidade,
+        cursos_desejados,
+        image_url
       } = usuario;
 
       const result = await sql`
-        INSERT INTO usuario (nome, email, tipo_usuario, criado_em, password_hash)
-        VALUES (${nome}, ${email}, ${tipo_usuario}, ${criado_em}, ${password_hash})
-        RETURNING id, nome, email
+        INSERT INTO usuario (nome, email, tipo_usuario, criado_em, password_hash, idade, cidade, cursos_desejados, image_url)
+        VALUES (${nome}, ${email}, ${tipo_usuario}, ${criado_em}, ${password_hash}, ${idade}, ${cidade}, ${cursos_desejados}, ${image_url})
+        RETURNING id, nome, email, idade, cidade, cursos_desejados, image_url, criado_em
       `;
 
       return result[0];
     }
     async getAllUsuario() {
         const users = await sql`
-          select id, nome, email, tipo_usuario
+          select id, nome, email, tipo_usuario, idade, cidade, cursos_desejados, image_url
           from usuario
         `
         return users
@@ -48,6 +52,9 @@ class UsuarioRepository{
         WHERE email = ${email}
       `;
       return result[0];
+    }
+    async updateUsuario(id, update){
+
     }
 }
 
