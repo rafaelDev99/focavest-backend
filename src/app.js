@@ -8,7 +8,11 @@ const usuarioRoutes = require('./routes/usuario')
 const authRoutes = require('./routes/auth');
 const atividadeRoutes = require('./routes/atividade');
 const vestibularRoutes = require('./routes/vestibular');
+<<<<<<< HEAD
 const rotinaRoutes = require('./routes/rotina')
+=======
+const vestibularUsuarioRoutes = require('./routes/vestibular-usuario');
+>>>>>>> f9c53ca6860918ead398337d0e5c030ab1b261d6
 const { authenticateToken } = require('./middlewares/security');
 
 const PORT = process.env.PORT || 3000;
@@ -25,6 +29,7 @@ app.use('/api/usuarios',authenticateToken, usuarioRoutes);
 app.use('/api/atividades',authenticateToken, atividadeRoutes);
 app.use('/api/vestibulares',authenticateToken, vestibularRoutes);
 app.use('/api/rotinas',authenticateToken, rotinaRoutes);
+app.use('/api/vestibular-usuario',authenticateToken, vestibularUsuarioRoutes);
 app.use('/api/auth', authRoutes)
 
 app.listen(PORT, () => {

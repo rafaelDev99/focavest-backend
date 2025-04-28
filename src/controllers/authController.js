@@ -34,8 +34,9 @@ class AuthController {
                 'email': usuario.email,
                 'tipo': usuario.tipo_usuario
             }
+            
             const token = jwt.sign({
-                user: JSON.stringify(usuarioDto)
+                user: usuarioDto
             }, JWTSECRET)
 
             const bodyResponse = {
