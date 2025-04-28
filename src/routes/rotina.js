@@ -1,5 +1,5 @@
 const express = require('express');
-const rotinaController = require('../controllers/rotinaController')
+const rotinaController = require('../controllers/rotinaController');
 
 const router = express.Router();
 
@@ -68,6 +68,62 @@ router.get('/progresso/:usuarioId', async (req, res) => {
         })
     }
     return res.json(result.body);
+});
+
+/**
+ * @swagger
+ * /api/rotinas/{id}:
+ *   patch:
+ *     summary: Atualiza uma rotina existente
+ *     tags: [Rotinas]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID do vestibular
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nome:
+ *                  type: string
+ *               descricao:
+ *                 type: string
+ *               materia:
+ *                 type: string
+ *               topico:
+ *                 type: string
+ *               data:
+ *                 type: string
+ *                 format: date-time
+ *                 example: "2025-04-27T14:00:00Z"
+ *     responses:
+ *       200:
+ *         description: Rotina atualizada com sucesso
+ *       400:
+ *         description: Erro na atualização da rotina
+ */
+router.patch('/:id', async (req, res) => {
+    const id = req.params.id;
+    const result = await rotinaController.updateRotina(id, req.body);
+
+    if (result.error) {
+        return res.status(400).json({
+            status: 'Failure',
+            message: result.message
+        });
+    }
+
+    return res.status(200).json({
+        status: 'Ok',
+        message: result.message,
+        body: result.body
+    });
 });
 
 module.exports = router;

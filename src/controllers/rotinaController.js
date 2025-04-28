@@ -1,3 +1,4 @@
+const updateRotinaDto_data = require('../dto/rotina/updateRotinaDto');
 const rotinaRepository = require('../infra/repository/rotina/rotina');
 
 class RotinaController {
@@ -51,11 +52,10 @@ class RotinaController {
                 body: null
             }
         }
-        
     }
     async createRotina(body){
         const createRotinaDto = body;
-        rotina = {
+        const rotina = {
             nome: createRotinaDto.nome,
             descricao: createRotinaDto.descricao,
             materia: createRotinaDto.materia,
@@ -63,7 +63,43 @@ class RotinaController {
             data: createRotinaDto.data,
             usuario_id: createRotinaDto.usuarioId
         }
-        return await rotinaRepository.createRotina()
+        return await rotinaRepository.createRotina(rotina)
+    }
+
+    async updateRotina(id,body){
+
+        if(!id){
+            return {
+                error: true,
+                message: "ID da rotina é obrigatorio!",
+                body: null
+            }
+        }
+
+        try {
+            const updateRotinaDto = updateRotinaDto_data(body);
+
+            const updatedFields = {};
+    
+            if (updateRotinaDto.nome) updatedFields.nome = updateRotinaDto.nome;
+            if (updateRotinaDto.descricao) updatedFields.descricao = updateRotinaDto.descricao;
+            if (updateRotinaDto.materia) updatedFields.materia = updateRotinaDto.materia;
+            if (updateRotinaDto.topico) updatedFields.topico = updateRotinaDto.topico;
+            if (updateRotinaDto.data) updatedFields.data = updateRotinaDto.data;
+
+            const result = await rotinaRepository.updateRotina(id, updatedFields);
+            return {
+                error: false,
+                message: "Rotina alterada com sucesso!",
+                body: result
+            }
+        } catch (err) {
+            return {
+                error: true,
+                message: err.message,
+                body: null
+            }
+        }
     }
 
     async getProgressoByWeekAndUsuarioId(usuarioId){

@@ -22,7 +22,6 @@ class RotinaRepository{
       LEFT JOIN atividade a ON a.rotina_id = r.id
       WHERE r.usuario_id = ${id}
     `;
-
     return result;
   }
 
@@ -42,11 +41,8 @@ class RotinaRepository{
       WHERE r.usuario_id = ${user_id} AND r.data BETWEEN ${start_of_week} AND ${end_of_week}
       GROUP BY r.id
     `;
-
-    
     return result[0];
   }
-
   async getRotinaById(id){
     const result = await sql`
       SELECT id, nome, descricao, materia, topico, data
@@ -71,6 +67,29 @@ class RotinaRepository{
       RETURNING id, nome, descricao, tempo_total, materia, topico, data
     `;
     return result;
+  }
+
+  async updateRotina(id, fieldsToUpdate){
+    if (Object.keys(fieldsToUpdate).length === 0) {
+      throw new Error('Nenhum campo para atualizar foi enviado');
+    }
+  
+    const keys = Object.keys(fieldsToUpdate);
+    const values = Object.values(fieldsToUpdate);
+
+    const setClause = keys.map((key, idx) => `${key} = $${idx + 1}`).join(', ');
+
+    const result = await sql.unsafe(
+      `UPDATE rotina SET ${setClause} WHERE id = $${keys.length + 1} 
+      RETURNING id, nome, descricao, materia, topico`,
+      [...values, id]
+    );
+
+    console.log(result[0]);
+    return result[0];
+  }
+  async deleteRotina(id){
+
   }
 }
 
