@@ -89,7 +89,17 @@ class RotinaRepository{
     return result[0];
   }
   async deleteRotina(id){
-      
+    if (!id) {
+      throw new Error('ID do rotina é obrigatório');
+    }
+
+    const result = await sql`
+      DELETE FROM rotina
+      WHERE id = ${id}
+      RETURNING id
+    `;
+
+    return result;
   }
 
   // {

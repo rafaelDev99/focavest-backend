@@ -108,6 +108,29 @@ class RotinaController {
         }
     }
 
+    async deleteRotina(id){
+        try {
+            const rotina = await rotinaRepository.deleteRotina(id);
+    
+            if (!rotina) {
+                return {
+                    error: true,
+                    message: 'Rotina não encontrado'
+                };
+            }
+    
+            return {
+                error: false,
+                message: 'Rotina deletado com sucesso'
+            };
+        } catch (error) {
+            return {
+                error: true,
+                message: error.message
+            };
+        }
+    }
+
     async getProgressoByWeekAndUsuarioId(usuarioId){
         const startOfWeek = new Date();
         startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());

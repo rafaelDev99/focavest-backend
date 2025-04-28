@@ -13,6 +13,29 @@ const router = express.Router();
 
 /**
  * @swagger
+ * /api/rotinas/{id}:
+ *   get:
+ *     summary: Retorna uma rotina pelo id
+ *     tags: [Rotinas]
+ *     parameters:
+ *        - in: path
+ *          name: id
+ *          schema:
+ *             type: string
+ *          required: true
+ *          description: ID da Rotina
+ *     responses:
+ *       200:
+ *         description: rotina
+ */
+router.get('/:id', async (req, res) => {
+    const id = req.params.id;
+    const result = await rotinaController.getRotinaById(id);
+    return res.json(result);
+});
+
+/**
+ * @swagger
  * /api/rotinas/{usuarioId}:
  *   get:
  *     summary: Retorna rotinas pelo id do usuario
