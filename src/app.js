@@ -8,6 +8,7 @@ const usuarioRoutes = require('./routes/usuario')
 const authRoutes = require('./routes/auth');
 const atividadeRoutes = require('./routes/atividade');
 const vestibularRoutes = require('./routes/vestibular');
+const rotinaRoutes = require('./routes/rotina')
 const vestibularUsuarioRoutes = require('./routes/vestibular-usuario');
 const { authenticateToken } = require('./middlewares/security');
 
@@ -24,6 +25,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use('/api/usuarios',authenticateToken, usuarioRoutes);
 app.use('/api/atividades',authenticateToken, atividadeRoutes);
 app.use('/api/vestibulares',authenticateToken, vestibularRoutes);
+app.use('/api/rotinas',authenticateToken, rotinaRoutes);
 app.use('/api/vestibular-usuario',authenticateToken, vestibularUsuarioRoutes);
 app.use('/api/auth', authRoutes)
 

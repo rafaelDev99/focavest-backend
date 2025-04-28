@@ -49,7 +49,8 @@ class VestibularRepository{
       const setClause = keys.map((key, idx) => `${key} = $${idx + 1}`).join(', ');
  
       const result = await sql.unsafe(
-        `UPDATE vestibular SET ${setClause} WHERE id = $${keys.length + 1} RETURNING id, data, pfp, uni, curso, site, criado_em`,
+        `UPDATE vestibular SET ${setClause} WHERE id = $${keys.length + 1} 
+        RETURNING id, data, pfp, uni, curso, site, criado_em`,
         [...values, id]
       );
     

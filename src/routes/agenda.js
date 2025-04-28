@@ -3,7 +3,6 @@ const router = express.Router();
 const agendaController = require('../controllers/agendaController');
 
 /**
- * @swagger
  * /api/agendas:
  *   get:
  *     summary: Get all agendas
@@ -16,7 +15,6 @@ router.get('/',agendaController.getAllAgendas);
 
 
 /**
- * @swagger
  * /api/agendas/{date}:
  *   get:
  *     summary: Get agenda by date
@@ -38,7 +36,6 @@ router.get('/agendas/:date', agendaController.getAgendaByDate);
 
 
 /**
- * @swagger
  * /api/agendas/{date}/task:
  *   post:
  *     summary: Add a new task to the agenda for a specific date
