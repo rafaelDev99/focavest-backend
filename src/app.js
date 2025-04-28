@@ -8,11 +8,8 @@ const usuarioRoutes = require('./routes/usuario')
 const authRoutes = require('./routes/auth');
 const atividadeRoutes = require('./routes/atividade');
 const vestibularRoutes = require('./routes/vestibular');
-<<<<<<< HEAD
 const rotinaRoutes = require('./routes/rotina')
-=======
 const vestibularUsuarioRoutes = require('./routes/vestibular-usuario');
->>>>>>> f9c53ca6860918ead398337d0e5c030ab1b261d6
 const { authenticateToken } = require('./middlewares/security');
 
 const PORT = process.env.PORT || 3000;
