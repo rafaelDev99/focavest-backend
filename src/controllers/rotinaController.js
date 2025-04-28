@@ -1,3 +1,4 @@
+const createRotinaDto_data = require('../dto/rotina/createRotinaDto');
 const updateRotinaDto_data = require('../dto/rotina/updateRotinaDto');
 const rotinaRepository = require('../infra/repository/rotina/rotina');
 
@@ -54,16 +55,21 @@ class RotinaController {
         }
     }
     async createRotina(body){
-        const createRotinaDto = body;
-        const rotina = {
-            nome: createRotinaDto.nome,
-            descricao: createRotinaDto.descricao,
-            materia: createRotinaDto.materia,
-            topico: createRotinaDto.topico,
-            data: createRotinaDto.data,
-            usuario_id: createRotinaDto.usuarioId
+        try {
+            const createRotinaDto = createRotinaDto_data(body);
+            const result = await rotinaRepository.createRotina(createRotinaDto)
+            return {
+                error: false,
+                message: "Rotina criada com sucesso!",
+                body: result
+            }
+        } catch (err) {
+            return {
+                error: true,
+                message: err.message,
+                body: null
+            }
         }
-        return await rotinaRepository.createRotina(rotina)
     }
 
     async updateRotina(id,body){

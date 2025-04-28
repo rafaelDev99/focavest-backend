@@ -64,7 +64,7 @@ class RotinaRepository{
     const result = await sql`
       INSERT INTO rotina (nome, descricao, materia, topico, data, usuario_id)
       VALUES (${nome}, ${descricao}, ${materia}, ${topico}, ${data}, ${usuario_id})
-      RETURNING id, nome, descricao, tempo_total, materia, topico, data
+      RETURNING id, nome, descricao, materia, topico, data, usuario_id
     `;
     return result;
   }
@@ -89,8 +89,17 @@ class RotinaRepository{
     return result[0];
   }
   async deleteRotina(id){
-
+      
   }
+
+  // {
+  //   "rotina_id": "258dba31-db5e-4830-96ca-02484d91be7b",
+  //   "cor": "cinza",
+  //   "titulo": "Atividade para deletar 1",
+  //   "descricao": "Teste de delete cascade",
+  //   "data_inicio": "2025-04-27T14:00:00Z",
+  //   "data_fim": "2025-04-27T18:00:00Z"
+  // }
 }
 
 module.exports = new RotinaRepository();
